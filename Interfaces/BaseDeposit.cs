@@ -1,8 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System;
 
 namespace Interfaces
 {
-    //TODO: Use class "BaseDeposit" from previous task ("Aggregation").
+    public class BaseDeposit : Deposit
+    {
+        public BaseDeposit(decimal amount, int period) : base(amount, period) { }
+
+        public override decimal Income()
+        {
+            decimal result = 0;
+            if (Period > 0)
+            {
+                result = Amount;
+                for (int i = 0; i < Period; i++)
+                {
+                    result += 0.05m * result;
+                }
+                if (result > Amount)
+                    return Math.Round(result - Amount, 2);
+            }
+            return result;
+        }
+    }
 }
